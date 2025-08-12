@@ -20,7 +20,7 @@ Then use `make` to build the project:
 ```sh
 cd build
 cmake -DBUILD_MODE=local ..
-make hello_world
+make ARCH=arm CROSS_COMPILE=aarch64-linux-gnu- hello_world
 ```
 
 As with the top-level `gemma.cpp` project you can use the `make` commands `-j`
@@ -34,7 +34,7 @@ example:
 ```sh
 ./hello_world --tokenizer tokenizer.spm --compressed_weights 2b-it-sfp.sbs --model 2b-it
 ```
-
+the tokenizer and the model weights can be downloaded from kaggle
 
 Next steps ::
 - Troubleshoot transcribing and see how prompt enginerring can make transcribing happen
