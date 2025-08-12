@@ -23,7 +23,7 @@
 #include <string>
 #include <vector>
 #define DR_WAV_IMPLEMENTATION
-#include "/home/qoqpop/Documents/camb_assignment/source/dr_wav.h"
+#include "../../dr_wav.h"
 
 // Placeholder for internal header, do not modify.
 #include "gemma/gemma.h"
@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
 
   // Open WAV file and read PCM samples
   drwav wav;
-  if (!drwav_init_file(&wav, "/home/qoqpop/Documents/camb_assignment/resources/roses-are.wav", NULL)) {
+  if (!drwav_init_file(&wav, "../../roses-are.wav", NULL)) {
     printf("Failed to open WAV file\n");
     return -1;
   }
@@ -99,13 +99,19 @@ int main(int argc, char** argv) {
 
 
   // Tokenize instructions.
-  std::string prompt = std::string("<bos><start_of_turn> user: You are an expert speech to text transcriber. The following is a segment of raw PCM audio data extracted from a .wav file. 1. Sample rate: 48000 Hz \n 2. Channels :: mono 3. sample format :: 16 bit signed integers 4. values are sequential waveform samples. Transcribe any spoken word in this segment into plain text. Output only the spoken word and do not add anything else from your end.\n<audio>");
+  //
+  //
+
+  std::string prompt = "<bos><start_of_turn>user: You are an experience spanish to english translator. The following is a text in english, translate and give the corresponding sentence in spanish. Do not add anything else from your end. text : Roses are red, Violets are blue<end_of_turn><start_of_turn>model: ";
+
+
+/*  std::string transcribe_prompt = std::string("<bos><start_of_turn> user: You are an expert speech to text transcriber. The following is a segment of raw PCM audio data extracted from a .wav file. 1. Sample rate: 48000 Hz \n 2. Channels :: mono 3. sample format :: 16 bit signed integers 4. values are sequential waveform samples. Transcribe any spoken word in this segment into plain text. Output only the spoken word and do not add anything else from your end.\n<audio>");
   for (drwav_uint64 i = 0; i < total_samples; i++) {
 	  prompt = prompt + std::to_string(*pSampleData);
 	  pSampleData++;
   }
-  prompt = prompt +"</audio><end_of_turn><start_of_turn>model :";//"Write a greeting to the world.";
-//  std::cout << "prompt :: "<< prompt << "\n" ;
+  transcribe_prompt = transcribe_prompt +"</audio><end_of_turn><start_of_turn>model :";//"Write a greeting to the world.";*/
+  std::cout << "prompt :: "<< prompt << "\n" ;
   const std::vector<int> tokens = gcpp::WrapAndTokenize(
       model.Tokenizer(), loader.Info(), generated, prompt);
   const size_t prompt_size = tokens.size();
